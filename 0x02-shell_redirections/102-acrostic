@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -cl | tr -d "/n" | paste -sd "
+cut -cl | tr -d "//n" | paste -s -d "
