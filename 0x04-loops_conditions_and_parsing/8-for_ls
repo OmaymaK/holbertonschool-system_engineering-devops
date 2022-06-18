@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#content fo current directory
 for entry in *
 do
 	[[ -e "$entry" ]] || break
