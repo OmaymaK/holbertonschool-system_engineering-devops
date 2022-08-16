@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Debugging by reseting apache server
+sudo service apache2 start
