@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 #Install and configure HAproxy
 
-sudo apt-get -y update
-sudo apt-get -y install haproxy
-sudo sed -i "s/ENABLED=0/ENABLED=1" /etc/default/haproxy
-sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.original
-sudo sed -i "$ a\listen 3681-lb-01\n\tbind *:80\n\tmode http\n\tbalance roundrobin\n\toption httpclose\n\toption forwardfor\n\tserver 4254-web-01 34.201.146.170:80 check\n\tserver 4254-web-02 54.86.254.146:80 check" /etc/haproxy/haproxy.cfg
-sudo service haproxy start
+sudo apt-get update -y
+sudo apt-get install --no-install-recommends software-properties-common -y
+sudo add-apt-repository ppa:vbernat/haproxy-2.0 -y
+sudo apt-get update -y
+sudo apt-get install haproxy=2.0.\* -y
+sudo sed -i "$ a frontend http_web\n\tbind *:80\n\tmode http\n\tdefault_backend my_backend\n" /etc/haproxy/haproxy.cfg
+sudo sed -i "$ a backend my_backend\n\tbalance roundrobin\n\tserver 4254-web-01 34.201.146.170:80 check\n\tserver 4254-web-02 54.86.254.146:80 check\n" /etc/haproxy/haproxy.cfg
+sudo service haproxy restart
