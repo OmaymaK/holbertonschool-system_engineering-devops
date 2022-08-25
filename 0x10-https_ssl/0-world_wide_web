@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Displays information about subdomains.
+
+funcdig()
+{
+	dig +noall +answer $2.$1 | awk '{split($1,arr,"\."); print "The subdomain " arr[1] " is a " $4 " record and points to " $5}' 2>/dev/null
+}
+
+if [[ $# -eq 1 ]]; then
+	sub=("www" "lb-01" "web-01" "web-02")
+	for str in ${sub[@]}; do
+		funcdig "$1" "$str"
+	done
+elif [[ $# -eq 2 ]]; then
+		funcdig "$1" "$2"
+fi
