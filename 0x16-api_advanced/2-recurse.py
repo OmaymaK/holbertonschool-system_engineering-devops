@@ -9,7 +9,7 @@ def recurse(subreddit, after='', hot_list=[]):
     """Return a list."""
     headers = {'User-Agent': "Mozilla/5.0"}
     url = 'https://www.reddit.com'
-    r = requests.get('{}/r/{}/hot.json?after={}'.format(url, subreddit, after)
+    r = requests.get('{}/r/{}/hot.json?after={}'.format(url, subreddit, after),
                      headers=headers, allow_redirects=False)
     if r.status_code == 302:
         return None
