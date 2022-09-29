@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Returns a list with the titles of hot articles for a given subreddit."""
 
 
